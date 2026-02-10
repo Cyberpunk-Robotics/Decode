@@ -17,7 +17,10 @@ apply from: '../build.dependencies.gradle'
 
 android {
     namespace = 'org.firstinspires.ftc.teamcode'
-
+    compileSdk 35
+    defaultConfig {
+        minSdk 24
+    }
     packagingOptions {
         jniLibs.useLegacyPackaging true
     }
@@ -43,6 +46,7 @@ repositories {
     maven {
         url "https://repo.dairy.foundation/snapshots"
     }
+    maven { url = "https://mymaven.bylazar.com/releases" }
 
 }
 
@@ -59,11 +63,12 @@ dependencies {
 //    implementation "org.solverslib:pedroPathing:SNAPSHOT-5a81a6b" // pedroPathing
 
     implementation "com.acmerobotics.dashboard:dashboard:0.4.17" // FTC Dashboard
-
     // Pedro Pathing
     implementation 'com.pedropathing:ftc:2.0.3'
     implementation 'com.pedropathing:telemetry:1.0.0'
+    implementation "com.bylazar:docs:1.0.5 "
+
 
     // Panels Dashboard
-    implementation "com.bylazar:fullpanels:1.0.5"
+    implementation "com.bylazar:fullpanels:1.0.12"
 }

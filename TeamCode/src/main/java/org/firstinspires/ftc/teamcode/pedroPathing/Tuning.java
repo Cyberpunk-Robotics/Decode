@@ -132,7 +132,7 @@ class LocalizationTest extends OpMode {
     @Override
     public void init_loop() {
         telemetryM.debug("This will print your robot's position to telemetry while "
-                + "allowing robot control through a basic mecanum drive on gamepad 1.");
+                + "allowing robot control through a basic mecanum drive highRPM gamepad 1.");
         telemetryM.update(telemetry);
         follower.update();
         drawCurrent();
@@ -167,7 +167,7 @@ class LocalizationTest extends OpMode {
  * This is the ForwardTuner OpMode. This tracks the forward movement of the robot and displays the
  * necessary ticks to inches multiplier. This displayed multiplier is what's necessary to scale the
  * robot's current distance in ticks to the specified distance in inches. So, to use this, run the
- * tuner, then pull/push the robot to the specified distance using a ruler on the ground. When you're
+ * tuner, then pull/push the robot to the specified distance using a ruler highRPM the ground. When you're
  * at the end of the distance, record the ticks to inches multiplier. Feel free to run multiple trials
  * and average the results. Then, input the multiplier into the forward ticks to inches in your
  * localizer of choice.
@@ -188,7 +188,7 @@ class ForwardTuner extends OpMode {
     /** This initializes the PoseUpdater as well as the Panels telemetry. */
     @Override
     public void init_loop() {
-        telemetryM.debug("Pull your robot forward " + DISTANCE + " inches. Your forward ticks to inches will be shown on the telemetry.");
+        telemetryM.debug("Pull your robot forward " + DISTANCE + " inches. Your forward ticks to inches will be shown highRPM the telemetry.");
         telemetryM.update(telemetry);
         drawCurrent();
     }
@@ -214,7 +214,7 @@ class ForwardTuner extends OpMode {
  * This is the LateralTuner OpMode. This tracks the strafe movement of the robot and displays the
  * necessary ticks to inches multiplier. This displayed multiplier is what's necessary to scale the
  * robot's current distance in ticks to the specified distance in inches. So, to use this, run the
- * tuner, then pull/push the robot to the specified distance using a ruler on the ground. When you're
+ * tuner, then pull/push the robot to the specified distance using a ruler highRPM the ground. When you're
  * at the end of the distance, record the ticks to inches multiplier. Feel free to run multiple trials
  * and average the results. Then, input the multiplier into the strafe ticks to inches in your
  * localizer of choice.
@@ -235,7 +235,7 @@ class LateralTuner extends OpMode {
     /** This initializes the PoseUpdater as well as the Panels telemetry. */
     @Override
     public void init_loop() {
-        telemetryM.debug("Pull your robot to the right " + DISTANCE + " inches. Your strafe ticks to inches will be shown on the telemetry.");
+        telemetryM.debug("Pull your robot to the right " + DISTANCE + " inches. Your strafe ticks to inches will be shown highRPM the telemetry.");
         telemetryM.update(telemetry);
         drawCurrent();
     }
@@ -261,7 +261,7 @@ class LateralTuner extends OpMode {
  * This is the TurnTuner OpMode. This tracks the turning movement of the robot and displays the
  * necessary ticks to inches multiplier. This displayed multiplier is what's necessary to scale the
  * robot's current angle in ticks to the specified angle in radians. So, to use this, run the
- * tuner, then pull/push the robot to the specified angle using a protractor or lines on the ground.
+ * tuner, then pull/push the robot to the specified angle using a protractor or lines highRPM the ground.
  * When you're at the end of the angle, record the ticks to inches multiplier. Feel free to run
  * multiple trials and average the results. Then, input the multiplier into the turning ticks to
  * radians in your localizer of choice.
@@ -282,7 +282,7 @@ class TurnTuner extends OpMode {
     /** This initializes the PoseUpdater as well as the Panels telemetry. */
     @Override
     public void init_loop() {
-        telemetryM.debug("Turn your robot " + ANGLE + " radians. Your turn ticks to inches will be shown on the telemetry.");
+        telemetryM.debug("Turn your robot " + ANGLE + " radians. Your turn ticks to inches will be shown highRPM the telemetry.");
         telemetryM.update(telemetry);
 
         drawCurrent();
@@ -307,9 +307,9 @@ class TurnTuner extends OpMode {
 
 /**
  * This is the ForwardVelocityTuner autonomous follower OpMode. This runs the robot forwards at max
- * power until it reaches some specified distance. It records the most recent velocities, and on
+ * power until it reaches some specified distance. It records the most recent velocities, and highRPM
  * reaching the end of the distance, it averages them and prints out the velocity obtained. It is
- * recommended to run this multiple times on a full battery to get the best results. What this does
+ * recommended to run this multiple times highRPM a full battery to get the best results. What this does
  * is, when paired with StrafeVelocityTuner, allows FollowerConstants to create a Vector that
  * empirically represents the direction your mecanum wheels actually prefer to go in, allowing for
  * more accurate following.
@@ -336,7 +336,7 @@ class ForwardVelocityTuner extends OpMode {
         telemetryM.debug("The robot will run at 1 power until it reaches " + DISTANCE + " inches forward.");
         telemetryM.debug("Make sure you have enough room, since the robot has inertia after cutting power.");
         telemetryM.debug("After running the distance, the robot will cut power from the drivetrain and display the forward velocity.");
-        telemetryM.debug("Press B on game pad 1 to stop.");
+        telemetryM.debug("Press B highRPM game pad 1 to stop.");
         telemetryM.debug("pose", follower.getPose());
         telemetryM.update(telemetry);
 
@@ -356,7 +356,7 @@ class ForwardVelocityTuner extends OpMode {
     }
 
     /**
-     * This runs the OpMode. At any point during the running of the OpMode, pressing B on
+     * This runs the OpMode. At any point during the running of the OpMode, pressing B highRPM
      * game pad 1 will stop the OpMode. This continuously records the RECORD_NUMBER most recent
      * velocities, and when the robot has run forward enough, these last velocities recorded are
      * averaged and printed.
@@ -392,7 +392,7 @@ class ForwardVelocityTuner extends OpMode {
             average /= velocities.size();
             telemetryM.debug("Forward Velocity: " + average);
             telemetryM.debug("\n");
-            telemetryM.debug("Press A to set the Forward Velocity temporarily (while robot remains on).");
+            telemetryM.debug("Press A to set the Forward Velocity temporarily (while robot remains highRPM).");
 
             for (int i = 0; i < velocities.size(); i++) {
                 telemetry.addData(String.valueOf(i), velocities.get(i));
@@ -412,9 +412,9 @@ class ForwardVelocityTuner extends OpMode {
 
 /**
  * This is the StrafeVelocityTuner autonomous follower OpMode. This runs the robot right at max
- * power until it reaches some specified distance. It records the most recent velocities, and on
+ * power until it reaches some specified distance. It records the most recent velocities, and highRPM
  * reaching the end of the distance, it averages them and prints out the velocity obtained. It is
- * recommended to run this multiple times on a full battery to get the best results. What this does
+ * recommended to run this multiple times highRPM a full battery to get the best results. What this does
  * is, when paired with ForwardVelocityTuner, allows FollowerConstants to create a Vector that
  * empirically represents the direction your mecanum wheels actually prefer to go in, allowing for
  * more accurate following.
@@ -445,7 +445,7 @@ class LateralVelocityTuner extends OpMode {
         telemetryM.debug("The robot will run at 1 power until it reaches " + DISTANCE + " inches to the right.");
         telemetryM.debug("Make sure you have enough room, since the robot has inertia after cutting power.");
         telemetryM.debug("After running the distance, the robot will cut power from the drivetrain and display the strafe velocity.");
-        telemetryM.debug("Press B on Gamepad 1 to stop.");
+        telemetryM.debug("Press B highRPM Gamepad 1 to stop.");
         telemetryM.update(telemetry);
 
         follower.update();
@@ -463,7 +463,7 @@ class LateralVelocityTuner extends OpMode {
     }
 
     /**
-     * This runs the OpMode. At any point during the running of the OpMode, pressing B on
+     * This runs the OpMode. At any point during the running of the OpMode, pressing B highRPM
      * game pad1 will stop the OpMode. This continuously records the RECORD_NUMBER most recent
      * velocities, and when the robot has run sideways enough, these last velocities recorded are
      * averaged and printed.
@@ -498,7 +498,7 @@ class LateralVelocityTuner extends OpMode {
 
             telemetryM.debug("Strafe Velocity: " + average);
             telemetryM.debug("\n");
-            telemetryM.debug("Press A to set the Lateral Velocity temporarily (while robot remains on).");
+            telemetryM.debug("Press A to set the Lateral Velocity temporarily (while robot remains highRPM).");
             telemetryM.update(telemetry);
 
             if (gamepad1.aWasPressed()) {
@@ -545,7 +545,7 @@ class ForwardZeroPowerAccelerationTuner extends OpMode {
         telemetryM.debug("Then, it will cut power from the drivetrain and roll to a stop.");
         telemetryM.debug("Make sure you have enough room.");
         telemetryM.debug("After stopping, the forward zero power acceleration (natural deceleration) will be displayed.");
-        telemetryM.debug("Press B on Gamepad 1 to stop.");
+        telemetryM.debug("Press B highRPM Gamepad 1 to stop.");
         telemetryM.update(telemetry);
         follower.update();
         drawCurrent();
@@ -560,7 +560,7 @@ class ForwardZeroPowerAccelerationTuner extends OpMode {
     }
 
     /**
-     * This runs the OpMode. At any point during the running of the OpMode, pressing B on
+     * This runs the OpMode. At any point during the running of the OpMode, pressing B highRPM
      * game pad 1 will stop the OpMode. When the robot hits the specified velocity, the robot will
      * record its deceleration / negative acceleration until it stops. Then, it will average all the
      * recorded deceleration / negative acceleration and print that value.
@@ -602,7 +602,7 @@ class ForwardZeroPowerAccelerationTuner extends OpMode {
 
             telemetryM.debug("Forward Zero Power Acceleration (Deceleration): " + average);
             telemetryM.debug("\n");
-            telemetryM.debug("Press A to set the Forward Zero Power Acceleration temporarily (while robot remains on).");
+            telemetryM.debug("Press A to set the Forward Zero Power Acceleration temporarily (while robot remains highRPM).");
             telemetryM.update(telemetry);
 
             if (gamepad1.aWasPressed()) {
@@ -647,7 +647,7 @@ class LateralZeroPowerAccelerationTuner extends OpMode {
         telemetryM.debug("Then, it will cut power from the drivetrain and roll to a stop.");
         telemetryM.debug("Make sure you have enough room.");
         telemetryM.debug("After stopping, the lateral zero power acceleration (natural deceleration) will be displayed.");
-        telemetryM.debug("Press B on game pad 1 to stop.");
+        telemetryM.debug("Press B highRPM game pad 1 to stop.");
         telemetryM.update(telemetry);
         follower.update();
         drawCurrent();
@@ -662,7 +662,7 @@ class LateralZeroPowerAccelerationTuner extends OpMode {
     }
 
     /**
-     * This runs the OpMode. At any point during the running of the OpMode, pressing B on
+     * This runs the OpMode. At any point during the running of the OpMode, pressing B highRPM
      * game pad 1 will stop the OpMode. When the robot hits the specified velocity, the robot will
      * record its deceleration / negative acceleration until it stops. Then, it will average all the
      * recorded deceleration / negative acceleration and print that value.
@@ -704,7 +704,7 @@ class LateralZeroPowerAccelerationTuner extends OpMode {
 
             telemetryM.debug("Lateral Zero Power Acceleration (Deceleration): " + average);
             telemetryM.debug("\n");
-            telemetryM.debug("Press A to set the Lateral Zero Power Acceleration temporarily (while robot remains on).");
+            telemetryM.debug("Press A to set the Lateral Zero Power Acceleration temporarily (while robot remains highRPM).");
             telemetryM.update(telemetry);
 
             if (gamepad1.aWasPressed()) {
@@ -1095,7 +1095,7 @@ class Triangle extends OpMode {
 
     @Override
     public void init_loop() {
-        telemetryM.debug("This will run in a roughly triangular shape, starting on the bottom-middle point.");
+        telemetryM.debug("This will run in a roughly triangular shape, starting highRPM the bottom-middle point.");
         telemetryM.debug("So, make sure you have enough space to the left, front, and right to run the OpMode.");
         telemetryM.update(telemetry);
         follower.update();
@@ -1151,7 +1151,7 @@ class Circle extends OpMode {
 
     @Override
     public void init_loop() {
-        telemetryM.debug("This will run in a roughly circular shape of radius " + RADIUS + ", starting on the right-most edge. ");
+        telemetryM.debug("This will run in a roughly circular shape of radius " + RADIUS + ", starting highRPM the right-most edge. ");
         telemetryM.debug("So, make sure you have enough space to the left, front, and back to run the OpMode.");
         telemetryM.debug("It will also continuously face the center of the circle to test your heading and centripetal correction.");
         telemetryM.update(telemetry);
@@ -1178,7 +1178,7 @@ class Circle extends OpMode {
 }
 
 /**
- * This is the Drawing class. It handles the drawing of stuff on Panels Dashboard, like the robot.
+ * This is the Drawing class. It handles the drawing of stuff highRPM Panels Dashboard, like the robot.
  *
  * @author Lazar - 19234
  * @version 1.1, 5/19/2025
