@@ -7,7 +7,7 @@ import com.seattlesolvers.solverslib.hardware.motors.Motor;
 import com.seattlesolvers.solverslib.hardware.motors.MotorEx;
 
 public class Shooter extends SubsystemBase {
-    private final MotorEx shooter;
+    private final MotorEx shooter, shooter2;
     double P = 0.07;
     double F = 0.00052;
     PIDFController pidf;
@@ -17,9 +17,13 @@ public class Shooter extends SubsystemBase {
 
     public Shooter(HardwareMap hardwareMap, Limelight limelight) {
         shooter = new MotorEx(hardwareMap, "shooter");
+        shooter2 = new MotorEx(hardwareMap, "shooter2");
         shooter.setRunMode(MotorEx.RunMode.RawPower);
+        shooter2.setRunMode(MotorEx.RunMode.RawPower);
         shooter.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
+        shooter2.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
         shooter.setInverted(true);
+        shooter2.setInverted(false);
         pidf = new PIDFController(P, 0, 0, F);
         this.limelight = limelight;
     }
@@ -27,8 +31,9 @@ public class Shooter extends SubsystemBase {
     public void on(){
             double setpoint = limelight.getShooterRPM();
             pidf.setSetPoint(setpoint);
-            double output = pidf.calculate(shooter.getVelocity(), pidf.getSetPoint());
-            shooter.set(output);
+            double output = pidf.calculate(shooter2.getVelocity(), pidf.getSetPoint());
+//            shooter.set(output);
+            shooter2.set(output);
     }
 
     public void off() {
@@ -36,11 +41,11 @@ public class Shooter extends SubsystemBase {
     }
 
     public double getRPM(){
-        return shooter.getVelocity();
+        return shooter2.getVelocity();
     }
 
     public void lowRPM(){
-        double output = pidf.calculate(shooter.getVelocity(), setpoint);
+        double output = pidf.calculate(shooter2.getVelocity(), setpoint);
         shooter.set(output);
     }
 

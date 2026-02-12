@@ -10,27 +10,25 @@ public class ShooterRPMStudy extends OpMode {
     double P = 0.035;
     double F = 0.00056;
     PIDFController pidf;
-    public int setpoint;
+    public double setpoint;
     @Override
     public void init() {
         shooter = new MotorEx(hardwareMap, "shooter");
         shooter.setRunMode(MotorEx.RunMode.RawPower);
         shooter.setInverted(true);
         pidf = new PIDFController(P, 0, 0, F);
-        setpoint = 2000;
+        setpoint = 0;
     }
 
     @Override
     public void loop() {
             if(gamepad1.rightBumperWasPressed()){
-                setpoint += 50;
+                setpoint += 0.1;
             }
             if(gamepad1.leftBumperWasPressed()){
-                setpoint -= 50;
+                setpoint -= 0.1;
             }
-        pidf.setSetPoint(setpoint);
-        double output = pidf.calculate(shooter.getVelocity(), pidf.getSetPoint());
-        shooter.set(output);
+        shooter.set(setpoint);
         telemetry.addData("Set RPM: ", setpoint);
         telemetry.addData("CurrentRPM ", shooter.getVelocity());
         telemetry.update();
