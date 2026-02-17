@@ -109,7 +109,7 @@ public class Decode extends OpMode {
         opModeTimer = new Timer();
         opModeTimer.resetTimer();
         follower = Constants.createFollower(hardwareMap);
-        limelight = new Limelight(hardwareMap);
+        limelight = new Limelight(hardwareMap, follower);
         shooter = new Shooter(hardwareMap, limelight);
         intake = new Intake(hardwareMap);
         indexer = new Indexer(hardwareMap);

@@ -123,12 +123,11 @@ public class SkyTech extends CommandOpMode {
         follower = Constants.createFollower(hardwareMap);
         follower.setStartingPose(startPose);
         indexer = new Indexer(hardwareMap);
-        limelight = new Limelight(hardwareMap);
+        limelight = new Limelight(hardwareMap,follower);
         intake = new Intake(hardwareMap);
         shooter = new Shooter(hardwareMap, limelight);
         buildPaths();
         SequentialCommandGroup autonomousSequence = new SequentialCommandGroup(
-
 
                         new ShooterCommand(shooter),
                         new WaitCommand(500),
@@ -221,6 +220,7 @@ public class SkyTech extends CommandOpMode {
     @Override
     public void run(){
         super.run();
+        follower.update();
         telemetry.addData("X: ", follower.getPose().getX());
         telemetry.addData("Y: ", follower.getPose().getY());
         telemetry.addData("Heading: ", follower.getPose().getHeading());

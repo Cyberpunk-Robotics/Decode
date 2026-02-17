@@ -12,7 +12,7 @@ public class Indexer extends SubsystemBase {
         indexer = new MotorEx(hardwareMap, "indexer");
         indexer.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
         indexer.setRunMode(Motor.RunMode.RawPower);
-        indexer.setInverted(true);
+        indexer.setInverted(false);
     }
     public void run() {
         indexer.set(1);

@@ -143,7 +143,7 @@ public class SkyTechRosu extends CommandOpMode {
         super.reset();
         follower = Constants.createFollower(hardwareMap);
         follower.setStartingPose(startPose);
-        limelight = new Limelight(hardwareMap);
+        limelight = new Limelight(hardwareMap, follower);
         indexer = new Indexer(hardwareMap);
         intake = new Intake(hardwareMap);
         shooter = new Shooter(hardwareMap, limelight);

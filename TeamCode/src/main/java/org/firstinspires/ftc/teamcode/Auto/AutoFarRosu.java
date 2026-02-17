@@ -8,6 +8,7 @@ import com.pedropathing.util.Timer;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
+import org.firstinspires.ftc.teamcode.Subsystems.Drive;
 import org.firstinspires.ftc.teamcode.Subsystems.Indexer;
 import org.firstinspires.ftc.teamcode.Subsystems.Intake;
 import org.firstinspires.ftc.teamcode.Subsystems.Limelight;
@@ -22,6 +23,7 @@ public class AutoFarRosu extends OpMode {
     private Shooter shooter;
     private Indexer indexer;
     private Turret turret;
+    private Drive drive;
     private Timer opModeTimer;
     private Timer actionTimer;
     private int step = 0;
@@ -136,7 +138,7 @@ public class AutoFarRosu extends OpMode {
         follower = Constants.createFollower(hardwareMap);
         follower.setPose(startPose);
 
-        limelight = new Limelight(hardwareMap);
+        limelight = new Limelight(hardwareMap, follower);
         shooter = new Shooter(hardwareMap, limelight);
         intake = new Intake(hardwareMap);
         indexer = new Indexer(hardwareMap);

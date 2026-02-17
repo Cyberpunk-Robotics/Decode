@@ -369,7 +369,7 @@ public class AutoAlbastru extends OpMode {
         follower = Constants.createFollower(hardwareMap);
         follower.setPose(startPose);
 
-        limelight = new Limelight(hardwareMap);
+        limelight = new Limelight(hardwareMap, follower);
         shooter = new Shooter(hardwareMap, limelight);
         intake = new Intake(hardwareMap);
         indexer = new Indexer(hardwareMap);

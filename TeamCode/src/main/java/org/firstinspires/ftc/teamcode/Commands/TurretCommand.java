@@ -10,7 +10,10 @@ public class TurretCommand extends CommandBase {
         this.turret = turret;
         addRequirements(turret);
     }
-
+    @Override
+    public void initialize(){
+        turret.init();
+    }
     @Override
     public void execute() {
         turret.periodic();

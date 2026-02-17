@@ -7,11 +7,11 @@ import com.seattlesolvers.solverslib.hardware.servos.ServoEx;
 @TeleOp(name = "ServoResetPos", group = "Test")
 public class ServoReset extends OpMode {
     private ServoEx servo;
-    private double pos = 0;
+    private double pos = 0.5;
     @Override
     public void init() {
-        servo = new ServoEx(hardwareMap, "servo");
-        servo.set(0);
+        servo = new ServoEx(hardwareMap, "turret");
+        servo.set(0.5);
     }
 
     @Override

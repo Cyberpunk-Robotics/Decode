@@ -11,7 +11,6 @@ import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 import org.firstinspires.ftc.teamcode.AutoCommands.ShooterAutoCommands.ShootingSequence;
 import org.firstinspires.ftc.teamcode.Commands.DriveCommand;
 import org.firstinspires.ftc.teamcode.Commands.DriveNormalizedCommand;
-import org.firstinspires.ftc.teamcode.Commands.FieldCentricCommand;
 import org.firstinspires.ftc.teamcode.Commands.IndexerCommands.IndexerForwardCommand;
 import org.firstinspires.ftc.teamcode.Commands.IndexerCommands.IndexerLowReverseCommand;
 import org.firstinspires.ftc.teamcode.Commands.IndexerCommands.IndexerReverseCommand;
@@ -29,6 +28,7 @@ import org.firstinspires.ftc.teamcode.Subsystems.Intake;
 import org.firstinspires.ftc.teamcode.Subsystems.Limelight;
 import org.firstinspires.ftc.teamcode.Subsystems.Shooter;
 import org.firstinspires.ftc.teamcode.Subsystems.Turret;
+import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 import java.util.List;
 
@@ -55,16 +55,18 @@ public class TeleOp extends OpMode {
     private IndexerLowReverseCommand indexerLowReverseCommand;
     private Turret turret;
     private TurretCommand turretCommand;
+    private Follower follower;
     
     private GamepadEx gamepadA, gamepadB;
 
     @Override
     public void init() {
+        follower = Constants.createFollower(hardwareMap);
         CommandScheduler.getInstance().reset();
         CommandScheduler.getInstance().enable();
         CommandScheduler.getInstance().setBulkReading(hardwareMap, LynxModule.BulkCachingMode.AUTO);
         drive = new Drive(hardwareMap);
-        limelight = new Limelight(hardwareMap);
+        limelight = new Limelight(hardwareMap, follower);
         shooter = new Shooter(hardwareMap, limelight);
         intake = new Intake(hardwareMap);
         indexer = new Indexer(hardwareMap);
@@ -123,6 +125,7 @@ public class TeleOp extends OpMode {
         new GamepadButton(gamepadA,GamepadKeys.Button.LEFT_BUMPER)
                 .whenHeld(reverseIntakeCommand);
 
+//        new GamepadButton(gamepadA, GamepadKeys.Button.DPAD_UP).whenPressed())  sa seteze pose la pose u de la limelight limelight.getpose()
     }
 
 
@@ -136,6 +139,13 @@ public class TeleOp extends OpMode {
         telemetry.addData("RPM: ", shooter.getRPM());
         telemetry.addData("ID: ", limelight.getPrimaryTagId());
         telemetry.addData("Tx: ", limelight.getTx());
+        telemetry.addData("getOdo", drive.getOdometry());
+        telemetry.addData("getDistance", limelight.getDistanceToBasket());
+//        telemetry.addData("Turret Target", turret.getTargetTicks());
+//        telemetry.addData("Turret Error", turret.getErrorTicks());
         telemetry.update();
+        follower.update();
+//        shooter.setTargetRpm(limelight.getRobotPose().distanceFrom());
+//        turret.setTargetAngle(limelight.getTx() - follower.getHeading());
     }
 }
